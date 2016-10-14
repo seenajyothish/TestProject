@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+
+    <services>
+        <service-include file-path="remoting-config.xml"/>
+        <service-include file-path="messaging-config.xml"/>
+        </services>
+	
+
+    <channels>
+
+        <channel-definition class="mx.messaging.channels.AMFChannel" id="my-amf">
+            <endpoint class="flex.messaging.endpoints.AMFEndpoint" uri="weborb.wo"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+            </properties>
+        </channel-definition>
+		
+		<channel-definition class="mx.messaging.channels.HTTPChannel" id="my-http">
+            <endpoint class="flex.messaging.endpoints.HTTPEndpoint" url="weborb.wo"/>
+        </channel-definition>
+        
+        <channel-definition class="mx.messaging.channels.AMFChannel" id="my-polling-amf">
+            <endpoint class="flex.messaging.endpoints.AMFEndpoint" uri="weborb.wo"/>
+            <properties>
+                <polling-enabled>true</polling-enabled>
+                <polling-interval-seconds>1</polling-interval-seconds>
+            </properties>
+        </channel-definition>              
+
+        <channel-definition class="mx.messaging.channels.AMFChannel" id="session-channel">
+            <endpoint class="flex.messaging.endpoints.AMFEndpoint" uri="weborb.wo?activate=session"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+            </properties>
+        </channel-definition>
+
+        <channel-definition class="mx.messaging.channels.AMFChannel" id="singleton-channel">
+            <endpoint class="flex.messaging.endpoints.AMFEndpoint" uri="weborb.wo?activate=application"/>
+            <properties>
+                <polling-enabled>false</polling-enabled>
+            </properties>
+        </channel-definition>
+
+        <channel-definition class="mx.messaging.channels.SecureAMFChannel" id="my-secure-amf">
+            <endpoint class="flex.messaging.endpoints.SecureAMFEndpoint" uri="weborb.wo"/>
+        </channel-definition>
+    </channels>
+</services-config>
